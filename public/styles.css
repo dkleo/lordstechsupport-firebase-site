@@ -1,0 +1,55 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  background-color: #fff8f0;
+  color: #333;
+  text-align: center;
+}
+
+.hero {
+  background: linear-gradient(135deg, #f77f00, #ffb84d);
+  color: white;
+  padding: 4rem 1rem;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 1rem;
+}
+
+.cta {
+  background: white;
+  color: #f77f00;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.services {
+  background: #fff;
+  padding: 3rem 1rem;
+}
+
+.services h2 {
+  color: #f77f00;
+}
+
+.services ul {
+  list-style: none;
+  padding: 0;
+}
+
+.services li {
+  margin: 0.75rem 0;
+  font-size: 1.1rem;
+}
+
+footer {
+  background: #555;
+  color: white;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
