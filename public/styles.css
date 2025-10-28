@@ -196,11 +196,14 @@ body {
 }
 
 .trust-points {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 3rem;
   margin-bottom: 4rem;
-  flex-wrap: wrap;
+  justify-items: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .trust-item {
@@ -319,7 +322,9 @@ footer {
   }
   
   .trust-points {
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+    max-width: 400px;
   }
   
   .testimonial {
