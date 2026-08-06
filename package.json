@@ -1,0 +1,9 @@
+{
+  "name": "lordstechsupport-firebase-site",
+  "private": true,
+  "scripts": {
+    "deploy": "firebase deploy",
+    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:backend": "firebase deploy --only firestore,functions"
+  }
+}

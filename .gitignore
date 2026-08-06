@@ -4,8 +4,14 @@ firebase-debug.log
 firebase-debug.*.log
 ui-debug.log
 
-# Node modules (if you add any)
+# Node modules
 node_modules/
+functions/node_modules/
+
+# Firebase function local env / secrets material
+functions/.env
+functions/.env.*
+functions/*.local
 
 # Environment variables
 .env
