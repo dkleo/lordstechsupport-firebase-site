@@ -6,15 +6,59 @@
   const statusEl = document.getElementById("contact-status");
   const submitBtn = document.getElementById("contact-submit");
 
-  if (appointmentLink && config.googleAppointmentUrl) {
-    appointmentLink.href = config.googleAppointmentUrl;
-    appointmentLink.target = "_blank";
-    appointmentLink.rel = "noopener noreferrer";
-    appointmentLink.dataset.placeholder = "false";
-    if (bookingNote) {
-      bookingNote.hidden = true;
+  const bookingReadyNote = document.getElementById("booking-ready-note");
+  const header = document.querySelector(".logo-header");
+  const appointmentUrl = (config.googleAppointmentUrl || "").trim();
+
+  // Keep linked sections from hiding under the sticky header.
+  function updateHeaderOffset() {
+    const isSticky = header && window.getComputedStyle(header).position === "sticky";
+    const offset = isSticky ? header.offsetHeight : 0;
+    document.documentElement.style.setProperty("--header-offset", offset + "px");
+  }
+  updateHeaderOffset();
+  window.addEventListener("resize", updateHeaderOffset);
+
+  // Book buttons: until a Google appointment link is set in config.js, they
+  // go to the booking section, and the booking section's main button goes to
+  // the contact form. Once the link is set, they all open the calendar.
+  function openInNewTab(link) {
+    link.href = appointmentUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    if (!link.querySelector(".visually-hidden")) {
+      const note = document.createElement("span");
+      note.className = "visually-hidden";
+      note.textContent = " (opens in a new tab)";
+      link.appendChild(note);
     }
   }
+
+  if (appointmentUrl) {
+    document.querySelectorAll("[data-book-link]").forEach(openInNewTab);
+    if (appointmentLink) {
+      appointmentLink.textContent = "See open times";
+      appointmentLink.dataset.placeholder = "false";
+      openInNewTab(appointmentLink);
+    }
+    if (bookingNote) bookingNote.hidden = true;
+    if (bookingReadyNote) bookingReadyNote.hidden = false;
+  }
+
+  // Links to the contact form: optionally pre-pick the type of help, then put
+  // the cursor in the first box so people can start typing right away.
+  document.querySelectorAll('a[href="#contact"]').forEach(function (link) {
+    link.addEventListener("click", function () {
+      if (!form) return;
+      const visitType = link.getAttribute("data-visit-type");
+      if (visitType && form.visitType) {
+        form.visitType.value = visitType;
+      }
+      window.setTimeout(function () {
+        if (form.name) form.name.focus({ preventScroll: true });
+      }, 0);
+    });
+  });
 
   function setStatus(message, type) {
     if (!statusEl) return;
@@ -69,8 +113,7 @@
 
     if (!functionUrl) {
       setStatus(
-        "Opening your email app so we still get your message. You can also call 917-579-2367.",
-        "error"
+        "Opening your email app with your message filled in. Just press Send. You can also call 917-579-2367."
       );
       window.location.href = buildMailto(payload);
       return;

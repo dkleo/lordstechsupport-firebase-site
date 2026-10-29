@@ -12,6 +12,59 @@
   --muted: #666;
   --bg-soft: #f9f9f9;
   --header-bg: #fbfdfb;
+  /* Darker orange for buttons and text links so white text on it
+     meets WCAG AA contrast (about 5.5:1 on white). */
+  --accent: #a84f00;
+  --accent-dark: #8a4100;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Linked sections stop just below the sticky header instead of under it. */
+[id] {
+  scroll-margin-top: calc(var(--header-offset, 140px) + 12px);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  background: var(--accent);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #1a5fb4;
+  outline-offset: 3px;
 }
 
 body {
@@ -23,7 +76,11 @@ body {
 }
 
 a {
-  color: var(--orange-dark);
+  color: var(--accent);
+}
+
+a[href^="tel:"] {
+  white-space: nowrap;
 }
 
 /* Logo Header */
@@ -66,11 +123,11 @@ a {
 }
 
 .header-phone:hover {
-  color: var(--orange-dark);
+  color: var(--accent);
 }
 
 .header-cta {
-  background: var(--orange);
+  background: var(--accent);
   color: white;
   padding: 0.65rem 1.1rem;
   border-radius: 8px;
@@ -80,7 +137,7 @@ a {
 }
 
 .header-cta:hover {
-  background: var(--orange-dark);
+  background: var(--accent-dark);
   color: white;
 }
 
@@ -183,13 +240,13 @@ a {
 
 .step {
   text-align: center;
-  max-width: 200px;
+  max-width: 240px;
 }
 
 .step-icon {
   width: 80px;
   height: 80px;
-  background: var(--orange);
+  background: var(--accent);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -201,10 +258,16 @@ a {
 }
 
 .step h3 {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: var(--text);
   font-weight: 600;
   line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+.step p {
+  color: var(--muted);
+  font-size: 1.1rem;
 }
 
 .premium-note {
@@ -277,7 +340,7 @@ a {
 .view-all-btn,
 .book-now-btn,
 .form-submit {
-  background: var(--orange);
+  background: var(--accent);
   color: white;
   padding: 1rem 2rem;
   border-radius: 8px;
@@ -293,7 +356,7 @@ a {
 .view-all-btn:hover,
 .book-now-btn:hover,
 .form-submit:hover {
-  background: var(--orange-dark);
+  background: var(--accent-dark);
   color: white;
 }
 
@@ -310,8 +373,8 @@ a {
 }
 
 .secondary-btn:hover {
-  border-color: var(--orange);
-  color: var(--orange-dark);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* Rates */
@@ -433,8 +496,9 @@ a {
 .form-row input:focus,
 .form-row select:focus,
 .form-row textarea:focus {
-  outline: 3px solid rgba(247, 127, 0, 0.35);
-  border-color: var(--orange);
+  outline: 3px solid #1a5fb4;
+  outline-offset: 1px;
+  border-color: var(--accent);
 }
 
 .hp-field {
@@ -472,7 +536,7 @@ a {
 .form-fallback {
   margin-top: 1rem;
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: 1.05rem;
 }
 
 .contact-aside {
@@ -630,9 +694,12 @@ footer a:hover {
 }
 
 @media (max-width: 768px) {
+  /* On phones the header is tall, so let it scroll away instead of
+     covering half the screen. Book and call buttons appear throughout. */
   .logo-header {
     flex-direction: column;
     align-items: flex-start;
+    position: static;
   }
 
   .header-logo {

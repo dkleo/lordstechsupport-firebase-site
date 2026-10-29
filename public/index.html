@@ -11,14 +11,15 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" href="favicon.ico" />
   </head>
-  <body>
+  <body id="top">
+    <a href="#main" class="skip-link">Skip to main content</a>
     <header class="logo-header">
-      <a href="#top" class="logo-link" id="top">
+      <a href="#top" class="logo-link">
         <img src="logo.png" alt="Lords Tech Support" class="header-logo" />
       </a>
       <nav class="header-actions" aria-label="Primary">
         <a href="tel:+19175792367" class="header-phone">917-579-2367</a>
-        <a href="#book" class="header-cta">Book a time</a>
+        <a href="#book" class="header-cta" data-book-link>Book a time</a>
         <div class="social-buttons">
           <a href="https://www.linkedin.com/in/dereklords/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -34,6 +35,7 @@
       </nav>
     </header>
 
+    <main id="main">
     <section class="hero">
       <p class="hero-eyebrow">Portland Metropolitan Area · Remote or in-home</p>
       <h1>Lords Tech Support</h1>
@@ -41,7 +43,7 @@
         Simple, patient tech help for everyday life — so you can feel confident again.
       </p>
       <div class="hero-ctas">
-        <a href="#book" class="book-now-btn">Book a time</a>
+        <a href="#book" class="book-now-btn" data-book-link>Book a time</a>
         <a href="tel:+19175792367" class="secondary-btn">Call 917-579-2367</a>
       </div>
       <p class="premium-note"><em>Patience is our premium feature.</em></p>
@@ -52,15 +54,27 @@
       <div class="steps-container">
         <div class="step">
           <div class="step-icon" aria-hidden="true">1</div>
-          <h3>Book a time<br />that works for you</h3>
+          <h3>Book a time</h3>
+          <p>
+            Pick a time that works for you.
+            <a href="#book" data-book-link>Book here</a> or call
+            <a href="tel:+19175792367">917-579-2367</a>.
+          </p>
         </div>
         <div class="step">
           <div class="step-icon" aria-hidden="true">2</div>
-          <h3>Connect<br />remotely or in person</h3>
+          <h3>Get help your way</h3>
+          <p>
+            We can help you remotely, or visit your home in the Portland
+            metro area.
+          </p>
         </div>
         <div class="step">
           <div class="step-icon" aria-hidden="true">3</div>
-          <h3>Feel confident<br />again</h3>
+          <h3>Feel confident again</h3>
+          <p>
+            We go one step at a time, at your pace. No question is too small.
+          </p>
         </div>
       </div>
     </section>
@@ -93,7 +107,7 @@
           <div class="service-icon" aria-hidden="true">🤝</div>
           <div class="service-content">
             <h3>Comfort Membership</h3>
-            <p>Monthly check-ins, updates, and on-call support. Contact us for monthly pricing.</p>
+            <p>Monthly check-ins, updates, and on-call support. <a href="#contact" data-visit-type="membership">Ask us about monthly pricing</a>.</p>
           </div>
         </div>
       </div>
@@ -116,7 +130,7 @@
           <p class="rate-price rate-price-soft">Monthly plan</p>
           <p>
             Ongoing peace of mind with regular check-ins.
-            <a href="#contact">Contact us for monthly pricing</a>.
+            <a href="#contact" data-visit-type="membership">Ask us about monthly pricing</a>.
           </p>
         </div>
       </div>
@@ -130,7 +144,8 @@
     <section class="book-section" id="book">
       <h2>Book an Appointment</h2>
       <p class="section-intro">
-        Choose a time for remote help or an in-home visit in the Portland metro area.
+        Remote help or an in-home visit in the Portland metro area. Book in
+        the way that is easiest for you.
       </p>
       <div class="book-actions">
         <a
@@ -138,11 +153,16 @@
           class="book-now-btn"
           href="#contact"
           data-placeholder="true"
-        >Open scheduling calendar</a>
+        >Request a time</a>
         <a href="tel:+19175792367" class="secondary-btn">Prefer to call? 917-579-2367</a>
       </div>
       <p id="booking-setup-note" class="billing-note">
-        Scheduling calendar coming soon — use the contact form below or call to book.
+        Tell us a few good days and times in the form below. We’ll call or
+        email you to confirm your appointment.
+      </p>
+      <p id="booking-ready-note" class="billing-note" hidden>
+        Our calendar opens in a new tab. Pick any open time. Prefer to talk
+        first? Just call us.
       </p>
     </section>
 
@@ -166,7 +186,7 @@
             <input id="email" name="email" type="email" autocomplete="email" required />
           </div>
           <div class="form-row">
-            <label for="visitType">How can we help you?</label>
+            <label for="visitType">Type of help</label>
             <select id="visitType" name="visitType" required>
               <option value="">Select one</option>
               <option value="remote">Remote help</option>
@@ -180,7 +200,7 @@
             <textarea id="message" name="message" rows="5" required></textarea>
           </div>
           <div class="form-row">
-            <label for="preferredTime">Best time to reach you (optional)</label>
+            <label for="preferredTime">Good days and times for you (optional)</label>
             <input id="preferredTime" name="preferredTime" type="text" />
           </div>
           <!-- Honeypot: leave empty -->
@@ -193,9 +213,9 @@
           </button>
           <p id="contact-status" class="contact-status" role="status" aria-live="polite"></p>
           <p class="form-fallback">
-            Or email
+            Prefer email or phone? Write to
             <a href="mailto:dkleo@me.com?subject=Lords%20Tech%20Support%20inquiry">dkleo@me.com</a>
-            / call <a href="tel:+19175792367">917-579-2367</a>
+            or call <a href="tel:+19175792367">917-579-2367</a>.
           </p>
         </form>
         <aside class="contact-aside">
@@ -244,10 +264,11 @@
       </div>
 
       <div class="hero-ctas">
-        <a href="#book" class="book-now-btn">Book a time</a>
+        <a href="#book" class="book-now-btn" data-book-link>Book a time</a>
         <a href="#contact" class="secondary-btn">Contact us</a>
       </div>
     </section>
+    </main>
 
     <footer>
       <p>© 2026 Lords Tech Support — Helping Seniors Stay Connected</p>
