@@ -614,47 +614,6 @@ a[href^="tel:"] {
   line-height: 1.2;
 }
 
-.testimonial {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  max-width: 600px;
-  margin: 0 auto 3rem;
-  flex-wrap: wrap;
-}
-
-.testimonial-content {
-  text-align: left;
-  flex: 1;
-  min-width: 300px;
-}
-
-.testimonial-content p {
-  font-size: 1.1rem;
-  color: var(--text);
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  font-style: italic;
-}
-
-.testimonial-author {
-  color: var(--muted);
-  font-weight: 500;
-}
-
-.testimonial-photo {
-  flex-shrink: 0;
-}
-
-.testimonial-photo img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--orange);
-}
-
 /* Footer */
 footer {
   background: #333;
@@ -729,15 +688,6 @@ footer a:hover {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     max-width: 400px;
-  }
-
-  .testimonial {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .testimonial-content {
-    text-align: center;
   }
 
   .social-buttons a {
